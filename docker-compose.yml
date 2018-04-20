@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+ gameserver:
+   image: gpn-snake:gameserver-1.0.0
+   volumes:
+    - ./gameserver/code:/code
+   command: /bin/bash -c "export CC=/usr/bin/clang-5.0 && 
+                          export CXX=/usr/bin/clang++-5.0 && 
+                          mkdir -p /build && 
+                          cd /build && 
+                          cmake /code &&
+                          make" 
