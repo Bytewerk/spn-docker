@@ -10,4 +10,14 @@ services:
                           mkdir -p /build && 
                           cd /build && 
                           cmake /code &&
+                          make"
+ relayserver:
+   image: gpn-snake:relayserver-1.0.0
+   volumes:
+    - ./relayserver/code:/code
+   command: /bin/bash -c "export CC=/usr/bin/clang-5.0 && 
+                          export CXX=/usr/bin/clang++-5.0 && 
+                          mkdir -p /build && 
+                          cd /build && 
+                          cmake /code &&
                           make" 

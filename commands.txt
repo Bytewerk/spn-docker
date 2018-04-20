@@ -1,15 +1,22 @@
 git clone ..
 git submodule init
 git submodule update
+
 cd gameserver/code
 git pull
 git checkout origin/dev
 git submodule init
 git submodule update
 
+cd relayserver/code
+git pull
+git checkout origin/tech/json
+git submodule init
+git submodule update
+
 # build images
 docker build -t gpn-snake:gameserver-1.0.0 -f gameserver/Dockerfile .
-# docker build -t gpn-snake:XX-1.0.0 -f xx/Dockerfile .
+docker build -t gpn-snake:relayserver-1.0.0 -f relayserver/Dockerfile .
 
 # start docker compose
 docker-compose -f docker-compose.yml up

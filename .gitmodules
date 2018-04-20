@@ -1,3 +1,6 @@
 [submodule "gameserver/code"]
 	path = gameserver/code
-	url = https://git.bingo-ev.de/GPN18Programmierspiel/gameserver.git
+	url = ../gameserver.git
+[submodule "relayserver/code"]
+	path = relayserver/code
+	url = ../relayserver.git
