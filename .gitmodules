@@ -1,9 +1,12 @@
 [submodule "gameserver/code"]
 	path = gameserver/code
 	url = ../gameserver.git
+	branch = dev
 [submodule "relayserver/code"]
 	path = relayserver/code
 	url = ../relayserver.git
+	branch = tech/json
 [submodule "vis/code"]
 	path = vis/code
 	url = ../vis-pixijs.git
+	branch = feature/JsonProtocol
