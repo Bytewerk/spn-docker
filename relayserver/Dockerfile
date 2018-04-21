@@ -13,3 +13,4 @@ RUN export CC=/usr/bin/clang-5.0 && \
     cmake /code && \
     make
                             
+EXPOSE 9009

@@ -12,3 +12,5 @@ RUN export CC=/usr/bin/clang-5.0 && \
     cd /build && \
     cmake /code && \
     make -j4
+
+EXPOSE 9010
