@@ -1,23 +1,30 @@
 version: "3"
 
 services:
- gameserver:
-   image: gpn-snake:gameserver-1.0.0
-   volumes:
-    - ./gameserver/code:/code
-   command: /bin/bash -c "export CC=/usr/bin/clang-5.0 && 
-                          export CXX=/usr/bin/clang++-5.0 && 
-                          mkdir -p /build && 
-                          cd /build && 
-                          cmake /code &&
-                          make"
- relayserver:
-   image: gpn-snake:relayserver-1.0.0
-   volumes:
-    - ./relayserver/code:/code
-   command: /bin/bash -c "export CC=/usr/bin/clang-5.0 && 
-                          export CXX=/usr/bin/clang++-5.0 && 
-                          mkdir -p /build && 
-                          cd /build && 
-                          cmake /code &&
-                          make" 
+  gameserver:
+    image: gpn-snake:gameserver-1.0.0
+    ports:
+      - "9010:9010"
+    command: /bin/bash -c "cd /build && ./GameServer"
+  relayserver:
+    image: gpn-snake:relayserver-1.0.0
+    ports:
+      - "9009:9009"
+    depends_on:
+      - gameserver
+    command: /bin/bash -c "cd /build && relayserver/RelayServer" 
+  proxy:
+    command: /bin/bash -c "cat /etc/nginx/conf.d/nginx_conf.template > /etc/nginx/conf.d/default.conf && 
+                            nginx -g 'daemon off;'"
+    depends_on:
+      - gameserver
+      - relayserver
+    #environment:
+    #  - NGINX_HOST=todo.com
+    #  - NGINX_PORT=80
+    image: nginx:1.13
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/nginx_conf.template:/etc/nginx/conf.d/nginx_conf.template
+      - ./vis/code:/vis

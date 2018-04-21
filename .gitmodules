@@ -4,3 +4,6 @@
 [submodule "relayserver/code"]
 	path = relayserver/code
 	url = ../relayserver.git
+[submodule "vis/code"]
+	path = vis/code
+	url = ../vis-pixijs.git
