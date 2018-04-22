@@ -1,30 +1,66 @@
-version: "3"
+version: "3.3"
 
 services:
+  database:
+    image: mariadb:10.3
+    restart: always
+    # disable these ports in production
+    ports:
+      - "3306:3306"
+    # Enable this, to store the database outside the container (in production)
+    #volumes: 
+    #  - ./tmp/database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=superSecr3t
+      - MYSQL_DATABASE=snake
+      - MYSQL_USER=snake
+      - MYSQL_PASSWORD=snake
   gameserver:
     image: gpn-snake:gameserver-1.0.0
+    # disable these ports in production
     ports:
       - "9010:9010"
     command: /bin/bash -c "cd /build && ./GameServer"
+    depends_on:
+      - database
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_DB=snake
+      - MYSQL_USER=snake
+      - MYSQL_PASSWORD=snake
   relayserver:
     image: gpn-snake:relayserver-1.0.0
+    # disable these ports in production
     ports:
       - "9009:9009"
     depends_on:
       - gameserver
     command: /bin/bash -c "export GAMESERVER_HOST=gameserver && cd /build && relayserver/RelayServer" 
+  website:
+    image: gpn-snake:website-1.0.0
+    ports:
+      - "8000:8000"
+    command: /bin/sh -c "cd /code/ && 
+                           python manage.py migrate && 
+                           python manage.py collectstatic --noinput && 
+                           gunicorn -b 0.0.0.0:8000 Programmierspiel.wsgi"
+    depends_on:
+      - database
+    volumes:
+      - ./tmp/static:/static
   proxy:
     command: /bin/bash -c "cat /etc/nginx/conf.d/nginx_conf.template > /etc/nginx/conf.d/default.conf && 
                             nginx -g 'daemon off;'"
     depends_on:
       - gameserver
       - relayserver
-    #environment:
-    #  - NGINX_HOST=todo.com
-    #  - NGINX_PORT=80
+      - website
     image: nginx:1.13
     ports:
       - "80:80"
     volumes:
       - ./proxy/nginx_conf.template:/etc/nginx/conf.d/nginx_conf.template
       - ./vis/code:/vis
+      - ./tmp/static:/static
+   
+    

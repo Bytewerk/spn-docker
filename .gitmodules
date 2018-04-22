@@ -1,7 +1,7 @@
 [submodule "gameserver/code"]
 	path = gameserver/code
 	url = ../gameserver.git
-	branch = dev
+	branch = feature/mysql2
 [submodule "relayserver/code"]
 	path = relayserver/code
 	url = ../relayserver.git
@@ -10,3 +10,7 @@
 	path = vis/code
 	url = ../vis-pixijs.git
 	branch = feature/JsonProtocol
+[submodule "website/code"]
+	path = website/code
+	url = ../website.git
+	branch = branch/beautify_views
