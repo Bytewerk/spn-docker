@@ -4,15 +4,23 @@ git submodule update
 
 cd gameserver/code
 git pull
-git checkout origin/dev
+git checkout feature/mysql2
 git submodule init
 git submodule update
 
 cd relayserver/code
 git pull
-git checkout origin/tech/json
+git checkout tech/json
 git submodule init
 git submodule update
+
+cd website/code
+git pull
+git checkout branch/beautify_views
+
+cd vis/code
+git pull
+git checkout feature/JsonProtocol
 
 # build images
 docker build -t gpn-snake:gameserver-1.0.0 -f gameserver/Dockerfile .
