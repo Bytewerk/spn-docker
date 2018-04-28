@@ -23,9 +23,8 @@ git pull
 git checkout feature/JsonProtocol
 
 # build images
-docker build -t gpn-snake:gameserver-1.0.0 -f gameserver/Dockerfile .
-docker build -t gpn-snake:relayserver-1.0.0 -f relayserver/Dockerfile .
-docker build -t gpn-snake:website-1.0.0 -f website/Dockerfile .
+./0_build_baselayer.sh
+./1_build_images.sh
 
 # start docker compose - complete
 docker-compose -f docker-compose.yml up
