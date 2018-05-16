@@ -1,16 +1,9 @@
 [submodule "gameserver/code"]
 	path = gameserver/code
-	url = ../gameserver.git
-	branch = feature/mysql2
+	url = ../spn-gameserver.git
 [submodule "relayserver/code"]
 	path = relayserver/code
-	url = ../relayserver.git
-	branch = master
-[submodule "vis/code"]
-	path = vis/code
-	url = ../vis-pixijs.git
-	branch = feature/JsonProtocol
+	url = ../spn-relayserver.git
 [submodule "website/code"]
 	path = website/code
-	url = ../website.git
-	branch = branch/beautify_views
+	url = ../spn-website.git
