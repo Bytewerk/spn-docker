@@ -18,10 +18,6 @@ cd website/code
 git pull
 git checkout branch/beautify_views
 
-cd vis/code
-git pull
-git checkout feature/JsonProtocol
-
 # build images
 ./0_build_baselayer.sh
 ./1_build_images.sh

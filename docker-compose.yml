@@ -60,7 +60,7 @@ services:
       - "80:80"
     volumes:
       - ./proxy/nginx_conf.template:/etc/nginx/conf.d/nginx_conf.template
-      - ./vis/code:/vis
+      #- ./vis/code:/vis
       - ./tmp/static:/static
    
     
