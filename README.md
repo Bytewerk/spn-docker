@@ -43,3 +43,6 @@ run the containers individually like this:
     docker-compose up -d website    # this initializes the database
     sleep 10
     docker-compose up               # runs the rest and shows log messages
+
+## Visiting the game
+The game can be reached at `localhost:80`. Don't use Port 8000, because static files (for example css, js) won't be served.
