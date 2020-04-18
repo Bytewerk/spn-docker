@@ -1,5 +1,9 @@
 # SPN Docker Environment
 
+**IMPORTANT**: This is a repository related to the GPN18 version of SPN. It is
+no longer maintained. See https://github.com/schlangenprogrammiernacht/spn-meta
+for the GPN19 version!
+
 This repository contains DockerFiles and scripts used to set up a SPN server for quick testing.
 
 **The Docker environment should currently not be used to set up a “production”
